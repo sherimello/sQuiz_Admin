@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQuizAdmin">
         <activity
+            android:name=".activities.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SignIn"
             android:exported="false" />
         <activity
             android:name=".activities.Splash"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.activity_quiz_list"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

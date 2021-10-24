@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_quiz_id"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="11dp"
+    app:cardCornerRadius="11dp"
+    tools:scaleX="1"
+    tools:scaleY="1"
+    tools:alpha="1"
+    android:scaleX=".5"
+    android:scaleY=".5"
+    android:alpha="0"
+    app:cardElevation="11dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        >
+
+        <TextView
+            android:id="@+id/text_quizname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/bontserrat_bold"
+            android:gravity="start"
+            android:singleLine="true"
+            android:layout_margin="11dp"
+            android:text="@string/sherimello"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_quizID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:layout_marginLeft="11dp"
+            android:layout_marginRight="11dp"
+            android:layout_marginBottom="11dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="start"
+            android:text="@string/key_dummy"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/text_quizname"
+            app:layout_constraintStart_toStartOf="@+id/text_quizname"
+            app:layout_constraintTop_toBottomOf="@+id/card_copy" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_copy"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="11dp"
+            app:cardCornerRadius="1000dp"
+            app:cardElevation="11dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_quizname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_quizname">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="3dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/copy" />
+
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

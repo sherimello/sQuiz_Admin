@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/sQuizAdmin/app/src/main/res/layout/activity_sign_in.xml" value="0.20253164556962025" />
+        <entry key="..\:/sQuizAdmin/app/src/main/res/drawable-v24/copy.xml" value="0.21837606837606838" />
+        <entry key="..\:/sQuizAdmin/app/src/main/res/drawable-v24/ic_baseline_add_24.xml" value="0.21837606837606838" />
+        <entry key="..\:/sQuizAdmin/app/src/main/res/drawable-v24/logout.xml" value="0.21837606837606838" />
+        <entry key="..\:/sQuizAdmin/app/src/main/res/drawable-v24/sad.xml" value="0.21837606837606838" />
+        <entry key="..\:/sQuizAdmin/app/src/main/res/layout/activity_quiz_list.xml" value="0.20512820512820512" />
+        <entry key="..\:/sQuizAdmin/app/src/main/res/layout/activity_sign_in.xml" value="0.20512820512820512" />
         <entry key="..\:/sQuizAdmin/app/src/main/res/layout/activity_splash.xml" value="0.20253164556962025" />
+        <entry key="..\:/sQuizAdmin/app/src/main/res/layout/quiz_card_for_list.xml" value="0.20512820512820512" />
       </map>
     </option>
   </component>
