@@ -8,4 +8,6 @@
     <string name="no_squiz_yet">no sQUIZ yet\npress the \'+\' button to add one.</string>
     <string name="sherimello">sheriMello</string>
     <string name="key_dummy">adfadfaddsdfgsfsdfg</string>
+    <string name="create_quiz">create quiz</string>
+    <string name="this_is_the_answer">this is the answer</string>
 </resources>
