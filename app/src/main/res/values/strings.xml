@@ -10,4 +10,13 @@
     <string name="key_dummy">adfadfaddsdfgsfsdfg</string>
     <string name="create_quiz">create quiz</string>
     <string name="this_is_the_answer">this is the answer</string>
+    <string name="e_g_jimmy">e.g. jimmy</string>
+    <string name="e_g_annie">e.g. annie</string>
+    <string name="e_g_sheri">e.g. sheri</string>
+    <string name="_0">0</string>
+    <string name="dummy_question">e.g. who is izumi uchiha?</string>
+    <string name="see_question_s">see question(s)</string>
+    <string name="e_g_x">e.g. x</string>
+    <string name="option_4">option 4:</string>
+    <string name="e_g_z">e.g. z</string>
 </resources>
