@@ -2,12 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.Splash">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card3"
+        android:id="@+id/card1"
         android:layout_width="75dp"
         android:layout_height="75dp"
         app:cardBackgroundColor="#FD52D8"
@@ -27,13 +28,13 @@
         app:cardCornerRadius="1000dp"
         app:cardElevation="5dp"
         app:layout_constraintVertical_bias="1"
-        app:layout_constraintBottom_toBottomOf="@+id/card1"
+        app:layout_constraintBottom_toBottomOf="@+id/card3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card1"
+        android:id="@+id/card3"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_margin="11dp"
