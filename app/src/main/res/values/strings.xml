@@ -19,4 +19,6 @@
     <string name="e_g_x">e.g. x</string>
     <string name="option_4">option 4:</string>
     <string name="e_g_z">e.g. z</string>
+    <string name="create">create</string>
+    <string name="enter_quiz_name">enter quiz name</string>
 </resources>
