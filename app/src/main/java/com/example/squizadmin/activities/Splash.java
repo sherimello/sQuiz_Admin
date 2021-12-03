@@ -2,9 +2,11 @@ package com.example.squizadmin.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Pair;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
@@ -14,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.squizadmin.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Splash extends AppCompatActivity {
 
@@ -82,7 +85,31 @@ public class Splash extends AppCompatActivity {
     }
 
     private void changeActivity() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            new Handler().postDelayed(() -> {
+                final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
+                        this,
+                        Pair.create(card1, "card1"),
+                        Pair.create(card2, "card2"),
+                        Pair.create(card3, "card3"));
+                startActivity(new Intent(getApplicationContext(), SignIn.class), options.toBundle());
+                new Handler().postDelayed(this::finish, 2000);
+
+            }, 700);
+            return;
+        }
+        card1.setVisibility(View.GONE);
+        card2.setVisibility(View.GONE);
+        new Handler().postDelayed(() -> {
+
+        }, 1000);
+        final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(
+                this,card3, "card1");
+        startActivity(new Intent(getApplicationContext(), activity_quiz_list.class), options.toBundle());
+        new Handler().postDelayed(this::finish, 2000);
+
+
+//        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//        finish();
     }
 }

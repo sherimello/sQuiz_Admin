@@ -81,6 +81,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1037121806475-k81fbb23he0ue95s790vkjesb4i39lpi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.squizadmin",
+            "certificate_hash": "ee9573a562979c3d7f29d0fc5a6b564233eb0a5d"
+          }
+        },
+        {
           "client_id": "1037121806475-19oo0ec40aum8ke1kcistteum6i7oooh.apps.googleusercontent.com",
           "client_type": 3
         }

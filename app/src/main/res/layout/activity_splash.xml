@@ -11,33 +11,36 @@
         android:id="@+id/card1"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:transitionName="card1"
         app:cardBackgroundColor="#FD52D8"
         app:cardCornerRadius="1000dp"
         app:cardElevation="3dp"
         app:layout_constraintBottom_toBottomOf="@+id/card2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card2"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:transitionName="card2"
         app:cardBackgroundColor="#AB4EFD"
         app:cardCornerRadius="1000dp"
         app:cardElevation="5dp"
-        app:layout_constraintVertical_bias="1"
         app:layout_constraintBottom_toBottomOf="@+id/card3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card3"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_margin="11dp"
+        android:transitionName="card3"
         app:cardCornerRadius="1000dp"
         app:cardElevation="11dp"
         app:layout_constraintBottom_toTopOf="@+id/text_squiz"

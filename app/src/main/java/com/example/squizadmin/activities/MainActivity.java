@@ -32,6 +32,8 @@ import com.example.squizadmin.classes.CryptoHandler;
 import com.example.squizadmin.classes.QuizData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,18 +54,22 @@ import javax.crypto.NoSuchPaddingException;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FloatingActionButton floatingActionButton_add_quiz_data;
-    private EditText editText_question, editText_op1, editText_op2, editText_op3, editText_op4;
+    private EditText editText_question, editText_op1, editText_op2, editText_op3, editText_op4, edit_quizID;
     private CheckBox checkBox1, checkBox2, checkBox3, checkBox4, temp_checkBox;
     private TextView text_question_count, text_see_questions;
     private ScrollView scroll_question_card;
     private Button button_create_quiz;
+    //new
+    private Button button_create;
     private int question_count = 0;
     private CardView card_questions_list, card_quizID;
     private RecyclerView recycler;
     private LinearLayout linear_dark_bg;
     private ArrayList<QuizData> quizData;
     private ArrayList<String> answers;
-    private String SK, IV;
+    private String SK, IV, userNode;
+    //new
+    private String chosen_answer = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,25 +92,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editText_op2 = findViewById(R.id.editText_op2);
         editText_op3 = findViewById(R.id.editText_op3);
         editText_op4 = findViewById(R.id.editText_op4);
+        edit_quizID = findViewById(R.id.edit_quizID);
         card_questions_list = findViewById(R.id.card_questions_list);
         recycler = findViewById(R.id.recycler);
         button_create_quiz = findViewById(R.id.button_create_quiz);
         floatingActionButton_add_quiz_data = findViewById(R.id.floatingActionButton_add_quiz_data);
         scroll_question_card = findViewById(R.id.scrollView2);
+        //new
+        button_create = findViewById(R.id.button_create);
 
         floatingActionButton_add_quiz_data.setOnClickListener(this);
         text_see_questions.setOnClickListener(this);
         button_create_quiz.setOnClickListener(this);
+        //new
+        button_create.setOnClickListener(this);
 
         setListenerToEdittext(editText_op1);
         setListenerToEdittext(editText_op2);
         setListenerToEdittext(editText_op3);
         setListenerToEdittext(editText_op4);
 
-        setOnCheckedListenerToCheckBox(checkBox1);
-        setOnCheckedListenerToCheckBox(checkBox2);
-        setOnCheckedListenerToCheckBox(checkBox3);
-        setOnCheckedListenerToCheckBox(checkBox4);
+        //new, now we sending editTexts as well
+        setOnCheckedListenerToCheckBox(checkBox1, editText_op1);
+        setOnCheckedListenerToCheckBox(checkBox2, editText_op2);
+        setOnCheckedListenerToCheckBox(checkBox3, editText_op3);
+        setOnCheckedListenerToCheckBox(checkBox4, editText_op4);
 
 
     }
@@ -113,11 +125,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return editText.getText().toString().trim();
     }
 
-    private void setOnCheckedListenerToCheckBox(CheckBox checkBox) {
+    private void setOnCheckedListenerToCheckBox(CheckBox checkBox, EditText editText) {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (checkBox.isChecked()) {
+                    //new
+                    chosen_answer = editText.getText().toString().trim();
+
                     if (temp_checkBox != null) {
                         temp_checkBox.setChecked(false);
                     }
@@ -137,6 +152,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+
+        //new
+        if (v == button_create) {
+            uploadQuiz();
+        }
 
         if (v == button_create_quiz) {
             card_quizID.setVisibility(View.VISIBLE);
@@ -168,7 +188,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             question_count++;
             animateQuestionCard();
             addDataToQuizDataArrayList();
-
+            //new
+            addDataToanswersArrayList(chosen_answer);
         }
     }
 
@@ -186,6 +207,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return new QuizData(quizData.get(index).getQue(),
                 quizData.get(index).get_1(), quizData.get(index).get_2(),
                 quizData.get(index).get_3(), quizData.get(index).get_4());
+    }
+
+    //new
+    private void stopProgressUI(ProgressDialog pd) {
+        pd.dismiss();
+        quizData.clear();
+        answers.clear();
+        question_count = 0;
+        text_question_count.setText("0");
+        text_see_questions.setVisibility(View.GONE);
+        text_question_count.setVisibility(View.GONE);
+        changeVisibilityOfQuizIDAddingUI(View.GONE);
+    }
+
+    //new
+    private void changeVisibilityOfQuizIDAddingUI(int i) {
+        card_quizID.setVisibility(i);
+        linear_dark_bg.setVisibility(i);
     }
 
     private void uploadQuiz() {
@@ -217,19 +256,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | InvalidAlgorithmParameterException | UnsupportedEncodingException | InvalidKeyException | BadPaddingException e) {
                         e.printStackTrace();
                         Snackbar.make(editText_op1, Objects.requireNonNull(e.getLocalizedMessage()), Snackbar.LENGTH_SHORT).show();
-//                        stopProgressUI(pd);
                     }
                 }
-//                userNode = Objects.requireNonNull(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail()).substring(0, Objects.requireNonNull(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail()).length() - 10);
-//                Toast.makeText(getApplicationContext(), userNode, Toast.LENGTH_SHORT).show();
-//                DatabaseReference databaseReference4 = FirebaseDatabase.getInstance().getReference().child("Users");
-//                databaseReference4.child(userNode).child(key).setValue(getTextFromEditText(edit_quizID)).addOnCompleteListener(task1 -> {
-////                    stopProgressUI(pd);
+                //new
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                userNode = Objects.requireNonNull(Objects.requireNonNull(currentUser).getEmail()).substring(0, Objects.requireNonNull(currentUser.getEmail()).length() -10);
+
+                DatabaseReference databaseReference4 = FirebaseDatabase.getInstance().getReference().child("Users");
+                databaseReference4.child(userNode).child(key).setValue(getTextFromEditText(edit_quizID)).addOnCompleteListener(task1 -> {
+                    stopProgressUI(pd);
 //                    onBackPressed();
-//                }).addOnFailureListener(e -> Snackbar.make(button_create_quiz, Objects.requireNonNull(e.getLocalizedMessage()), Snackbar.LENGTH_SHORT).show()).addOnCanceledListener(() -> {
-//                    Snackbar.make(button_create, "Connection access denied!", Snackbar.LENGTH_SHORT).show();
-//                    stopProgressUI(pd);
-//                });
+                }).addOnFailureListener(e -> Snackbar.make(button_create_quiz, Objects.requireNonNull(e.getLocalizedMessage()), Snackbar.LENGTH_SHORT).show()).addOnCanceledListener(() -> {
+                    Snackbar.make(button_create, "Connection access denied!", Snackbar.LENGTH_SHORT).show();
+                    stopProgressUI(pd);
+                });
             }
 
             @Override
@@ -244,7 +284,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void addDataToanswersArrayList(String s) {
         answers.add(s);
-
     }
 
     private void setListenerToEdittext(EditText editText) {
